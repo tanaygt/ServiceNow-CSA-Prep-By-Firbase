@@ -14,69 +14,45 @@ interface Message {
   content: string
 }
 
-interface ParsedResponse {
-    heading: string;
-    content: string;
-}
-
-const parseResponse = (response: string): ParsedResponse[] => {
-    const sections = response.split(/\d\.\s/).filter(Boolean);
-    if (sections.length > 1) {
-        return sections.map(section => {
-            const [heading, ...contentParts] = section.split('\n');
-            const content = contentParts.join('\n').trim();
-            // If there's no real content, use the heading as content.
-            // This handles single-line points.
-            const finalContent = content || heading.trim().replace(/:$/, '');
-            const finalHeading = content ? heading.trim().replace(/:$/, '') : '';
-
-            return {
-                heading: finalHeading,
-                content: finalContent
-            };
-        });
-    }
-    // Fallback for unformatted or single-line responses
-    return [{ heading: "", content: response }];
-}
-
-function SectionContent({ text, charLimit = 200 }: { text: string, charLimit?: number }) {
+function AIMessage({ text }: { text: string }) {
     const [isExpanded, setIsExpanded] = useState(false);
-    const isLongText = text.length > charLimit;
-    const displayText = isLongText && !isExpanded ? `${text.substring(0, charLimit)}...` : text;
+    const maxLength = 200;
 
+    if (text.length <= maxLength || isExpanded) {
+        return (
+            <div className="whitespace-pre-wrap">
+                <p>{text}</p>
+                {text.length > maxLength && (
+                    <Button
+                        variant="link"
+                        size="sm"
+                        onClick={() => setIsExpanded(false)}
+                        className="px-0 h-auto text-primary"
+                    >
+                        Read less
+                        <ChevronUp className="ml-1 h-4 w-4" />
+                    </Button>
+                )}
+            </div>
+        );
+    }
+
+    const truncatedText = text.substring(0, maxLength) + '...';
     return (
         <div>
-            <p className="text-sm whitespace-pre-wrap">{displayText}</p>
-            {isLongText && (
-                <Button variant="link" size="sm" onClick={() => setIsExpanded(!isExpanded)} className="px-0 h-auto text-primary">
-                    {isExpanded ? "Read less" : "Read more"}
-                    {isExpanded ? <ChevronUp className="ml-1 h-4 w-4" /> : <ChevronDown className="ml-1 h-4 w-4" />}
-                </Button>
-            )}
+            <p className="whitespace-pre-wrap">{truncatedText}</p>
+            <Button
+                variant="link"
+                size="sm"
+                onClick={() => setIsExpanded(true)}
+                className="px-0 h-auto text-primary"
+            >
+                Read more
+                <ChevronDown className="ml-1 h-4 w-4" />
+            </Button>
         </div>
     );
-}
-
-function FormattedResponse({ content }: { content: string }) {
-    const parsedSections = parseResponse(content);
-
-    // If only one section with no heading, treat it as a simple message
-    if (parsedSections.length === 1 && !parsedSections[0].heading) {
-        return <SectionContent text={parsedSections[0].content} />;
-    }
-
-    return (
-        <div className="space-y-3">
-            {parsedSections.map((section, index) => (
-                <div key={index}>
-                    {section.heading && <h4 className="font-semibold text-md mb-1">{section.heading}</h4>}
-                     <SectionContent text={section.content} />
-                </div>
-            ))}
-        </div>
-    );
-}
+};
 
 export function AiChatComponent() {
   const [messages, setMessages] = useState<Message[]>([])
@@ -153,13 +129,13 @@ export function AiChatComponent() {
                   </Avatar>
                 )}
                 <div
-                  className={`max-w-[85%] rounded-lg p-4 break-words ${
+                  className={`max-w-[85%] rounded-lg p-4 break-words text-sm ${
                     message.role === "user"
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted"
                   }`}
                 >
-                  {message.role === "assistant" ? <FormattedResponse content={message.content} /> : <p className="text-sm">{message.content}</p> }
+                  {message.role === "assistant" ? <AIMessage text={message.content} /> : <p>{message.content}</p> }
                 </div>
                 {message.role === "user" && (
                   <Avatar>

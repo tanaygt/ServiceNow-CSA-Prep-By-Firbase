@@ -30,19 +30,18 @@ const aiMentorChatPrompt = ai.definePrompt({
   name: 'aiMentorChatPrompt',
   input: {schema: AiMentorChatInputSchema},
   output: {schema: AiMentorChatOutputSchema},
-  prompt: `You are a ServiceNow certification expert. A student is asking a question about ServiceNow CSA certification.
+  prompt: `CRITICAL: Maximum 2 sentences total. Under 80 words.
 
-CRITICAL: You MUST keep your response under 100 words. Be extremely concise.
+A student is asking a question about ServiceNow CSA certification.
 
 Student Question: {{{message}}}
 Current Topic: {{{context}}}
 
-Please provide:
-1. A brief, direct answer (1-2 sentences).
-2. A quick, real-world example (1-2 sentences).
-3. A key takeaway for the exam (1 sentence).
+Answer format:
+- One clear sentence answering directly
+- One brief practical example or key point
 
-Your response must be structured with numbered points. Do not write long explanations.
+NO sections. NO bullet points. NO long explanations.
 `,
 });
 
