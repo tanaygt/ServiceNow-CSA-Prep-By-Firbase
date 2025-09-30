@@ -59,20 +59,18 @@ A comprehensive, all-in-one learning platform for ServiceNow CSA & CAD certifica
 - **AI Integration:** Google Generative AI
 - **Hosting:** Firebase Hosting
 
-
 🗂️ Project Structure
-text
 src/
 ├── components/          # Reusable UI components
 │   ├── Dashboard/       # Main dashboard
 │   ├── Flashcards/      # Flashcard system
 │   ├── AIMentor/        # AI chat assistant
 │   └── Resources/       # Learning resources
-├── pages/              # Application pages
-├── hooks/              # Custom React hooks
-├── services/           # Firebase and API services
-├── utils/              # Utility functions
-└── styles/             # Global styles
+├── pages/               # Application pages
+├── hooks/               # Custom React hooks
+├── services/            # Firebase and API services
+├── utils/               # Utility functions
+└── styles/              # Global styles
 
 📝 License
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -80,9 +78,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 👨‍💻 Developer
 Tanay Shrivastava - ServiceNow CSA Certified
 
-LinkedIn: tanayshrivastava-cse
-
-GitHub: @tanaygt
+ Connect on **[LinkedIn](https://www.linkedin.com/in/tanayshrivastava-cse/)**  
 
 🙏 Acknowledgments
 ServiceNow Community for shared resources
@@ -91,7 +87,6 @@ Firebase for amazing backend services
 
 React and Tailwind CSS communities
 
-All contributors and testers
 
 📞 Support
 If you have any questions or need help:
