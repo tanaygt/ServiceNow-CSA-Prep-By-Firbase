@@ -31,17 +31,18 @@ const aiMentorChatPrompt = ai.definePrompt({
   input: {schema: AiMentorChatInputSchema},
   output: {schema: AiMentorChatOutputSchema},
   prompt: `You are a ServiceNow certification expert. A student is asking a question about ServiceNow CSA certification.
+
+CRITICAL: You MUST keep your response under 100 words. Be extremely concise.
+
 Student Question: {{{message}}}
 Current Topic: {{{context}}}
 
-IMPORTANT: Your response must be concise and easy to read. Keep each numbered point to a maximum of 3-4 sentences.
-
 Please provide:
-1. A clear, concise explanation of the concept. (3-4 sentences max)
-2. Real-world examples of how it's used in a ServiceNow environment. (3-4 sentences max)
-3. Recommended next steps for study, pointing to official documentation or other reliable resources. (3-4 sentences max)
+1. A brief, direct answer (1-2 sentences).
+2. A quick, real-world example (1-2 sentences).
+3. A key takeaway for the exam (1 sentence).
 
-Keep the response helpful, friendly, and focused on ServiceNow best practices.
+Your response must be structured with numbered points. Do not write long explanations.
 `,
 });
 

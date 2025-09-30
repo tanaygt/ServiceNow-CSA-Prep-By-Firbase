@@ -25,16 +25,22 @@ const parseResponse = (response: string): ParsedResponse[] => {
         return sections.map(section => {
             const [heading, ...contentParts] = section.split('\n');
             const content = contentParts.join('\n').trim();
+            // If there's no real content, use the heading as content.
+            // This handles single-line points.
+            const finalContent = content || heading.trim().replace(/:$/, '');
+            const finalHeading = content ? heading.trim().replace(/:$/, '') : '';
+
             return {
-                heading: heading.trim().replace(/:$/, ''),
-                content: content
+                heading: finalHeading,
+                content: finalContent
             };
         });
     }
-    return [{ heading: "Response", content: response }];
+    // Fallback for unformatted or single-line responses
+    return [{ heading: "", content: response }];
 }
 
-function SectionContent({ text, charLimit = 300 }: { text: string, charLimit?: number }) {
+function SectionContent({ text, charLimit = 200 }: { text: string, charLimit?: number }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const isLongText = text.length > charLimit;
     const displayText = isLongText && !isExpanded ? `${text.substring(0, charLimit)}...` : text;
@@ -43,7 +49,7 @@ function SectionContent({ text, charLimit = 300 }: { text: string, charLimit?: n
         <div>
             <p className="text-sm whitespace-pre-wrap">{displayText}</p>
             {isLongText && (
-                <Button variant="link" size="sm" onClick={() => setIsExpanded(!isExpanded)} className="px-0 h-auto">
+                <Button variant="link" size="sm" onClick={() => setIsExpanded(!isExpanded)} className="px-0 h-auto text-primary">
                     {isExpanded ? "Read less" : "Read more"}
                     {isExpanded ? <ChevronUp className="ml-1 h-4 w-4" /> : <ChevronDown className="ml-1 h-4 w-4" />}
                 </Button>
@@ -55,11 +61,16 @@ function SectionContent({ text, charLimit = 300 }: { text: string, charLimit?: n
 function FormattedResponse({ content }: { content: string }) {
     const parsedSections = parseResponse(content);
 
+    // If only one section with no heading, treat it as a simple message
+    if (parsedSections.length === 1 && !parsedSections[0].heading) {
+        return <SectionContent text={parsedSections[0].content} />;
+    }
+
     return (
-        <div className="space-y-4">
+        <div className="space-y-3">
             {parsedSections.map((section, index) => (
                 <div key={index}>
-                    <h4 className="font-semibold text-md mb-1">{section.heading}</h4>
+                    {section.heading && <h4 className="font-semibold text-md mb-1">{section.heading}</h4>}
                      <SectionContent text={section.content} />
                 </div>
             ))}
@@ -142,7 +153,7 @@ export function AiChatComponent() {
                   </Avatar>
                 )}
                 <div
-                  className={`max-w-[85%] rounded-lg p-4 ${
+                  className={`max-w-[85%] rounded-lg p-4 break-words ${
                     message.role === "user"
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted"
