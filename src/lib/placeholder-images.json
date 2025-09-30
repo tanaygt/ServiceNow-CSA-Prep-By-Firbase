@@ -1,3 +1,28 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "module-1",
+      "description": "Abstract network connections",
+      "imageUrl": "https://images.unsplash.com/photo-1603121144201-1b7f945a0c92?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhYnN0cmFjdCUyMG5ldHdvcmt8ZW58MHx8fHwxNzU5MTQ0NDg1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "abstract network"
+    },
+    {
+      "id": "module-2",
+      "description": "User interface design elements",
+      "imageUrl": "https://images.unsplash.com/photo-1547119957-637f8679db1e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx1aSUyMGRlc2lnbnxlbnwwfHx8fDE3NTkxOTk2OTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "ui design"
+    },
+    {
+      "id": "module-3",
+      "description": "Database schema diagram",
+      "imageUrl": "https://images.unsplash.com/photo-1649451844931-57e22fc82de3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxkYXRhYmFzZSUyMHNjaGVtYXxlbnwwfHx8fDE3NTkyMjMxOTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "database schema"
+    },
+    {
+      "id": "module-4",
+      "description": "Business process workflow",
+      "imageUrl": "https://images.unsplash.com/photo-1666537072157-440346cea066?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3b3JrZmxvdyUyMGNoYXJ0fGVufDB8fHx8MTc1OTE0MTA4MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "workflow chart"
+    }
+  ]
 }
