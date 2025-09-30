@@ -41,7 +41,7 @@ A comprehensive, all-in-one learning platform for ServiceNow CSA & CAD certifica
 *AI-powered chat assistant for instant help*
 
 ### Interactive Flashcards
-![Flashcards](https://github.com/tanaygt/ServiceNow-CSA-Prep-By-Firbase/blob/main/Screenshot%202025-09-30%20163613.png)
+![Flashcards](https://github.com/tanaygt/ServiceNow-CSA-Prep-By-Firbase/blob/main/Screenshot%202025-09-30%20171615.png)
 *Flip cards for quick concept revision*
 
 ## 🚀 Live Demo
