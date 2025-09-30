@@ -98,7 +98,7 @@ If you have any questions or need help:
 
 Open an Issue
 
-![Connect on LinkedIn](https://www.linkedin.com/in/tanayshrivastava-cse/)
+[Connect on LinkedIn](https://www.linkedin.com/in/tanayshrivastava-cse/)
 
 Email: tanayshrivastava19@gmail.com
 
