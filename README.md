@@ -96,11 +96,9 @@ All contributors and testers
 📞 Support
 If you have any questions or need help:
 
-Open an Issue
+- Connect on **[LinkedIn](https://www.linkedin.com/in/tanayshrivastava-cse/)**  
 
-[Connect on LinkedIn](https://www.linkedin.com/in/tanayshrivastava-cse/)
-
-Email: tanayshrivastava19@gmail.com
+Email: [tanayshrivastava19@gmail.com](mailto:tanayshrivastava19@gmail.com)  
 
 ⭐ If this project helped you, please give it a star! ⭐
 
