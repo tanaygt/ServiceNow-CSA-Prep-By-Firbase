@@ -18,7 +18,7 @@ type FlashcardProps = {
   flashcards: Flashcard[];
 };
 
-const BATCH_SIZE = 6;
+const BATCH_SIZE = 10;
 
 export function FlashcardComponent({ flashcards }: FlashcardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -128,7 +128,7 @@ export function FlashcardComponent({ flashcards }: FlashcardProps) {
         <div className='mt-4'>
             <Button onClick={handleLoadMore}>
                 <PlusCircle className="mr-2 h-4 w-4" />
-                Load More Flashcards
+                Load More Flashcards ({visibleFlashcards.length} loaded)
             </Button>
         </div>
       )}

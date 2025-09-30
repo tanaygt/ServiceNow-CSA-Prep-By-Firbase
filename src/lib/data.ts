@@ -9,6 +9,15 @@ export const learningResources = [
     duration: "15+ hours"
   },
   {
+    id: "advanced-csa-playlist",
+    title: "Advanced CSA Concepts Playlist",
+    description: "In-depth tutorials for advanced ServiceNow administration topics",
+    type: "youtube" as const,
+    url: "https://www.youtube.com/watch?v=yf6BOswaex4&list=PL3ad-Yky2S7NvxnYqIC-1oLzt91WuMtj-",
+    category: "Video Course",
+    duration: "8+ hours"
+  },
+  {
     id: "official-learning-path",
     title: "ServiceNow Official Learning Path",
     description: "Official CSA learning path from ServiceNow",
@@ -16,6 +25,15 @@ export const learningResources = [
     url: "https://learning.servicenow.com/lxp/en/now-platform/certified-system-administrator-csa-learning-path?id=learning_path_prev&path_id=cc4919c6dbdeb700760a710439961966",
     category: "Official Training",
     duration: "Self-paced"
+  },
+  {
+    id: "dev-instance-guide",
+    title: "Create ServiceNow Developer Instance",
+    description: "Step-by-step guide to set up free developer instance",
+    type: "documentation" as const,
+    url: "https://www.servicenow.com/community/developer-forum/how-to-create-a-new-instance-of-service-now/m-p/1454470",
+    category: "Setup Guide",
+    duration: "10 min read"
   },
   {
     id: "servicenow-docs",
@@ -41,6 +59,15 @@ export const learningResources = [
     description: "Real exam questions and practice tests",
     type: "practice" as const,
     url: "https://www.examtopics.com/exams/servicenow/csa/view/",
+    category: "Practice Tests",
+    duration: "Multiple tests"
+  },
+  {
+    id: "certyiq-practice-tests",
+    title: "CSA Practice Tests & MCQs",
+    description: "Interactive practice tests with explanations",
+    type: "practice" as const,
+    url: "https://certyiq.com/practice-test/servicenow/csa",
     category: "Practice Tests",
     duration: "Multiple tests"
   },
@@ -218,5 +245,54 @@ export const flashcards = [
     front: "What is a Service Level Agreement (SLA)?",
     back: "A record that defines a set amount of time for a task to reach a certain condition, the tables to access, and what is to happen if the SLA is breached.",
     domain: "Self-Service and Automation"
+  },
+  {
+    id: "fc13",
+    front: "What is a UI Macro?",
+    back: "A reusable component that can be added to a UI Page or other UI element to display dynamic content.",
+    domain: "User Interface & Navigation"
+  },
+  {
+    id: "fc14",
+    front: "What is the 'g_form' object used for in client-side scripts?",
+    back: "g_form is a global object used to manage form fields and their values on a form. It provides methods like getValue(), setValue(), and setVisible().",
+    domain: "Scripting and Application Tools"
+  },
+  {
+    id: "fc15",
+    front: "What is a Script Include?",
+    back: "A reusable script on the server-side that can be called from any server-side script like Business Rules, UI Actions, or other Script Includes.",
+    domain: "Scripting and Application Tools"
+  },
+  {
+    id: "fc16",
+    front: "What are the stages of a flow in Flow Designer?",
+    back: "A flow consists of a Trigger and one or more Actions. It can also include subflows and logic like if/else conditions.",
+    domain: "Self-Service and Automation"
+  },
+  {
+    id: "fc17",
+    front: "What is the purpose of the Application Navigator?",
+    back: "It is the main navigation pane on the left side of the UI, allowing users to access different applications and modules.",
+    domain: "User Interface & Navigation"
+  },
+  {
+    id: "fc18",
+    front: "What is a Configuration Item (CI)?",
+    back: "Any component that needs to be managed in order to deliver an IT Service. CIs are stored in the CMDB.",
+    domain: "Database Management"
+  },
+  {
+    id: "fc19",
+    front: "What is a GlideRecord?",
+    back: "A server-side JavaScript class used for database operations instead of writing SQL queries. It allows you to query, insert, update, and delete records.",
+    domain: "Scripting and Application Tools"
+  },
+  {
+    id: "fc20",
+    front: "What is an Order Guide?",
+    back: "An Order Guide provides a single place to order multiple related items, simplifying the ordering process for users.",
+    domain: "Self-Service and Automation"
   }
 ];
+
