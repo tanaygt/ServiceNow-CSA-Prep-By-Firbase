@@ -11,10 +11,6 @@ import { BookOpen, ClipboardCheck, Zap, MessageSquare, ExternalLink, Linkedin } 
 import { learningResources } from "@/lib/data"
 
 export default function Dashboard() {
-  const user = {
-    name: "Tanay Shrivastava",
-    certification: "CSA Certified Professional",
-  }
 
   const quickActions = [
     { label: "Start Quiz", href: "/dashboard/quizzes", icon: ClipboardCheck },
@@ -26,18 +22,18 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col gap-8">
       <div className="text-center">
-        <h1 className="text-3xl font-bold font-headline">Welcome back, {user.name}!</h1>
-        <p className="text-muted-foreground">{user.certification}</p>
+        <h1 className="text-3xl font-bold font-headline">Welcome to ServiceNow CSA Preparation</h1>
+        <p className="text-muted-foreground">Your complete learning platform for CSA certification</p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2">
         <Card className="border-l-4 border-blue-500">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-lg font-semibold">LinkedIn Profile</CardTitle>
                 <Linkedin className="h-5 w-5 text-blue-600" />
             </CardHeader>
             <CardContent>
-                <p className="text-sm text-muted-foreground mb-4">Connect for opportunities</p>
+                <p className="text-sm text-muted-foreground mb-4">Made By Tanay Shrivastava - Connect on LinkedIn</p>
                 <a 
                     href="https://www.linkedin.com/in/tanayshrivastava-cse/" 
                     target="_blank" 
@@ -45,7 +41,7 @@ export default function Dashboard() {
                     className="w-full"
                 >
                     <Button variant="outline" size="sm" className="w-full">
-                        View Profile
+                        Connect Now
                         <ExternalLink className="ml-2 h-4 w-4" />
                     </Button>
                 </a>
@@ -59,19 +55,7 @@ export default function Dashboard() {
           <CardContent>
             <div className="text-3xl font-bold">{learningResources.length}</div>
             <p className="text-sm text-muted-foreground">
-              Covering CSA and CAD
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-lg font-semibold">Average Score</CardTitle>
-            <ClipboardCheck className="h-5 w-5 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">88%</div>
-            <p className="text-sm text-muted-foreground">
-              Trending upwards
+              CSA & CAD Learning Materials
             </p>
           </CardContent>
         </Card>
