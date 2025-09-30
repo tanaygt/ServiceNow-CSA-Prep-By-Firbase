@@ -13,7 +13,7 @@ import {
 
 const navItems = [
   { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/dashboard/modules', label: 'Modules', icon: BookOpen },
+  { href: '/dashboard/learning-resources', label: 'Resources', icon: BookOpen },
   { href: '/dashboard/quizzes', label: 'Quizzes', icon: ClipboardCheck },
   { href: '/dashboard/flashcards', label: 'Flashcards', icon: Zap },
   { href: '/dashboard/ai-mentor', label: 'AI Mentor', icon: MessageSquare },
@@ -25,7 +25,7 @@ export function DashboardNav() {
   return (
     <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
       {navItems.map((item) => {
-        const isActive = pathname === item.href;
+        const isActive = pathname.startsWith(item.href) && (item.href === '/dashboard' ? pathname === item.href : true);
         return (
           <Link
             key={item.href}

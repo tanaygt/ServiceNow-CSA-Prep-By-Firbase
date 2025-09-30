@@ -13,7 +13,7 @@ import {z} from 'genkit';
 
 const AiMentorChatInputSchema = z.object({
   message: z.string().describe('The user message to be sent to the AI mentor.'),
-  context: z.string().describe('The context of the conversation.'),
+  context: z.string().describe('The context of the conversation, including the current topic or certification path.'),
 });
 export type AiMentorChatInput = z.infer<typeof AiMentorChatInputSchema>;
 
@@ -30,7 +30,17 @@ const aiMentorChatPrompt = ai.definePrompt({
   name: 'aiMentorChatPrompt',
   input: {schema: AiMentorChatInputSchema},
   output: {schema: AiMentorChatOutputSchema},
-  prompt: `You are a ServiceNow certification expert. Help with this question: {{{message}}}. User context: {{{context}}}`,
+  prompt: `You are a ServiceNow certification expert. A student is asking a question about ServiceNow CSA certification.
+Student Question: {{{message}}}
+Current Topic: {{{context}}}
+
+Please provide:
+1. A clear, concise explanation of the concept.
+2. Real-world examples of how it's used in a ServiceNow environment.
+3. Recommended next steps for study, pointing to official documentation or other reliable resources.
+
+Keep the response helpful, friendly, and focused on ServiceNow best practices.
+`,
 });
 
 const aiMentorChatFlow = ai.defineFlow(

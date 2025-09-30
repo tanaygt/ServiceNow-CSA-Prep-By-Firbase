@@ -16,9 +16,10 @@ import {
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowUpRight, BookOpen, ClipboardCheck, Zap, MessageSquare } from "lucide-react"
+import { ArrowUpRight, BookOpen, ClipboardCheck, Zap, MessageSquare, ExternalLink } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { csamodules } from "@/lib/data"
+import { learningResources } from "@/lib/data"
+import { ResourceCard } from "@/components/resource-card"
 
 export default function Dashboard() {
   const user = {
@@ -46,9 +47,9 @@ export default function Dashboard() {
           <h1 className="text-3xl font-bold font-headline">Welcome back, {user.name}!</h1>
           <p className="text-muted-foreground">Here's your progress on the {user.certification} certification path.</p>
         </div>
-        <Link href="/dashboard/modules">
+        <Link href="/dashboard/learning-resources">
             <Button>
-                View All Modules
+                View All Resources
             </Button>
         </Link>
       </div>
@@ -70,13 +71,13 @@ export default function Dashboard() {
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Modules Completed</CardTitle>
+            <CardTitle className="text-sm font-medium">Resources Available</CardTitle>
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">1<span className="text-sm text-muted-foreground"> / {csamodules.length}</span></div>
+            <div className="text-2xl font-bold">{learningResources.length}</div>
             <p className="text-xs text-muted-foreground">
-              'Platform Overview' completed
+              Covering CSA and CAD certifications
             </p>
           </CardContent>
         </Card>
@@ -112,53 +113,22 @@ export default function Dashboard() {
         <Card className="xl:col-span-2">
           <CardHeader className="flex flex-row items-center">
             <div className="grid gap-2">
-              <CardTitle>Certification Roadmap</CardTitle>
+              <CardTitle>Top Learning Resources</CardTitle>
               <CardDescription>
-                Your learning path for the {user.certification} exam.
+                Direct links to kickstart your {user.certification} exam preparation.
               </CardDescription>
             </div>
             <Button asChild size="sm" className="ml-auto gap-1">
-              <Link href="/dashboard/modules">
+              <Link href="/dashboard/learning-resources">
                 View All
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </Button>
           </CardHeader>
-          <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Module</TableHead>
-                  <TableHead className="hidden sm:table-cell">Difficulty</TableHead>
-                  <TableHead className="hidden md:table-cell">Duration</TableHead>
-                  <TableHead className="text-right">Progress</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {csamodules.slice(0, 5).map(module => (
-                  <TableRow key={module.id}>
-                    <TableCell>
-                      <div className="font-medium">{module.title}</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        {module.description.substring(0, 40)}...
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden sm:table-cell">
-                        <Badge variant={module.difficulty === 'beginner' ? 'secondary' : module.difficulty === 'intermediate' ? 'outline' : 'default' } className="capitalize">
-                            {module.difficulty}
-                        </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell">{module.duration} min</TableCell>
-                    <TableCell className="text-right">
-                        <div className="flex items-center justify-end gap-2">
-                            <span>{module.progress}%</span>
-                            <Progress value={module.progress} className="w-20 h-2" />
-                        </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+          <CardContent className="grid gap-4 md:grid-cols-2">
+            {learningResources.slice(0, 4).map(resource => (
+                <ResourceCard key={resource.id} resource={resource} />
+            ))}
           </CardContent>
         </Card>
         <Card>
