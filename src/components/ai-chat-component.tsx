@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Send, Loader, Bot, User } from "lucide-react"
+import { Send, Loader, Bot, User, ChevronDown, ChevronUp } from "lucide-react"
 import { aiMentorChat } from "@/ai/flows/ai-chat-mentor"
 
 interface Message {
@@ -34,6 +34,24 @@ const parseResponse = (response: string): ParsedResponse[] => {
     return [{ heading: "Response", content: response }];
 }
 
+function SectionContent({ text, charLimit = 300 }: { text: string, charLimit?: number }) {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const isLongText = text.length > charLimit;
+    const displayText = isLongText && !isExpanded ? `${text.substring(0, charLimit)}...` : text;
+
+    return (
+        <div>
+            <p className="text-sm whitespace-pre-wrap">{displayText}</p>
+            {isLongText && (
+                <Button variant="link" size="sm" onClick={() => setIsExpanded(!isExpanded)} className="px-0 h-auto">
+                    {isExpanded ? "Read less" : "Read more"}
+                    {isExpanded ? <ChevronUp className="ml-1 h-4 w-4" /> : <ChevronDown className="ml-1 h-4 w-4" />}
+                </Button>
+            )}
+        </div>
+    );
+}
+
 function FormattedResponse({ content }: { content: string }) {
     const parsedSections = parseResponse(content);
 
@@ -42,7 +60,7 @@ function FormattedResponse({ content }: { content: string }) {
             {parsedSections.map((section, index) => (
                 <div key={index}>
                     <h4 className="font-semibold text-md mb-1">{section.heading}</h4>
-                    <p className="text-sm whitespace-pre-wrap">{section.content}</p>
+                     <SectionContent text={section.content} />
                 </div>
             ))}
         </div>

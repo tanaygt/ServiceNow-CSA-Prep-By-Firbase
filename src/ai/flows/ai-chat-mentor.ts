@@ -34,10 +34,12 @@ const aiMentorChatPrompt = ai.definePrompt({
 Student Question: {{{message}}}
 Current Topic: {{{context}}}
 
+IMPORTANT: Your response must be concise and easy to read. Keep each numbered point to a maximum of 3-4 sentences.
+
 Please provide:
-1. A clear, concise explanation of the concept.
-2. Real-world examples of how it's used in a ServiceNow environment.
-3. Recommended next steps for study, pointing to official documentation or other reliable resources.
+1. A clear, concise explanation of the concept. (3-4 sentences max)
+2. Real-world examples of how it's used in a ServiceNow environment. (3-4 sentences max)
+3. Recommended next steps for study, pointing to official documentation or other reliable resources. (3-4 sentences max)
 
 Keep the response helpful, friendly, and focused on ServiceNow best practices.
 `,

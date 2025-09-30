@@ -177,10 +177,46 @@ export const flashcards = [
     back: "A group of configuration changes that can be moved from one instance to another.",
     domain: "Platform Overview and Navigation"
   },
-    {
+  {
     id: "fc6",
     front: "What does Coalesce mean in an Import Set?",
     back: "When coalescing on a field, ServiceNow uses it as a unique key to update existing records instead of creating new ones.",
     domain: "Database Management"
+  },
+  {
+    id: "fc7",
+    front: "What is a Client Script?",
+    back: "A script that runs on the client-side (the user's web browser). Types include onLoad, onChange, onSubmit, and onCellEdit.",
+    domain: "Scripting and Application Tools"
+  },
+  {
+    id: "fc8",
+    front: "What is a Dictionary Override?",
+    back: "Allows a field in a child table to have different properties (e.g., default value, mandatory) than the same field in the parent table.",
+    domain: "Database Management"
+  },
+  {
+    id: "fc9",
+    front: "What is the purpose of a Transform Map?",
+    back: "To map data from a source table (e.g., from an import set) to a target table (e.g., cmdb_ci).",
+    domain: "Database Management"
+  },
+  {
+    id: "fc10",
+    front: "What is a UI Action?",
+    back: "A UI element (e.g., button, link, context menu item) that can execute JavaScript.",
+    domain: "User Interface & Navigation"
+  },
+  {
+    id: "fc11",
+    front: "What role is required to create and manage update sets?",
+    back: "The 'admin' role. Developers typically use update sets to move their work.",
+    domain: "Platform Overview and Navigation"
+  },
+  {
+    id: "fc12",
+    front: "What is a Service Level Agreement (SLA)?",
+    back: "A record that defines a set amount of time for a task to reach a certain condition, the tables to access, and what is to happen if the SLA is breached.",
+    domain: "Self-Service and Automation"
   }
 ];
