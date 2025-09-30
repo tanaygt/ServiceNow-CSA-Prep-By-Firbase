@@ -1,19 +1,52 @@
 "use client"
 
 import React, { useState, useRef, useEffect } from "react"
-import { useActions, type Streamable } from "ai/rsc"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Send, Loader } from "lucide-react"
-import type { AiMentorChatOutput } from "@/ai/flows/ai-chat-mentor"
+import { Send, Loader, Bot, User } from "lucide-react"
 import { aiMentorChat } from "@/ai/flows/ai-chat-mentor"
 
 interface Message {
   role: "user" | "assistant"
   content: string
+}
+
+interface ParsedResponse {
+    heading: string;
+    content: string;
+}
+
+const parseResponse = (response: string): ParsedResponse[] => {
+    const sections = response.split(/\d\.\s/).filter(Boolean);
+    if (sections.length > 1) {
+        return sections.map(section => {
+            const [heading, ...contentParts] = section.split('\n');
+            const content = contentParts.join('\n').trim();
+            return {
+                heading: heading.trim().replace(/:$/, ''),
+                content: content
+            };
+        });
+    }
+    return [{ heading: "Response", content: response }];
+}
+
+function FormattedResponse({ content }: { content: string }) {
+    const parsedSections = parseResponse(content);
+
+    return (
+        <div className="space-y-4">
+            {parsedSections.map((section, index) => (
+                <div key={index}>
+                    <h4 className="font-semibold text-md mb-1">{section.heading}</h4>
+                    <p className="text-sm whitespace-pre-wrap">{section.content}</p>
+                </div>
+            ))}
+        </div>
+    );
 }
 
 export function AiChatComponent() {
@@ -48,6 +81,7 @@ export function AiChatComponent() {
         { role: "assistant", content: result.response },
       ])
     } catch (error) {
+      console.error("AI Mentor Error:", error);
       setMessages([
         ...newMessages,
         { role: "assistant", content: "Sorry, I encountered an error. Please try again." },
@@ -64,7 +98,7 @@ export function AiChatComponent() {
             scrollContainer.scrollTop = scrollContainer.scrollHeight;
         }
     }
-  }, [messages])
+  }, [messages, isLoading])
 
   return (
     <Card className="flex flex-col h-[calc(100vh-180px)]">
@@ -72,7 +106,8 @@ export function AiChatComponent() {
         <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
           <div className="space-y-6">
             {messages.length === 0 && (
-                <div className="text-center text-muted-foreground">
+                <div className="text-center text-muted-foreground pt-10">
+                    <Bot className="mx-auto h-12 w-12 mb-4" />
                     <p>No messages yet. Start by asking a question.</p>
                 </div>
             )}
@@ -85,21 +120,21 @@ export function AiChatComponent() {
               >
                 {message.role === "assistant" && (
                   <Avatar>
-                    <AvatarFallback>AI</AvatarFallback>
+                    <AvatarFallback><Bot /></AvatarFallback>
                   </Avatar>
                 )}
                 <div
-                  className={`max-w-[75%] rounded-lg p-3 ${
+                  className={`max-w-[85%] rounded-lg p-4 ${
                     message.role === "user"
                       ? "bg-primary text-primary-foreground"
                       : "bg-muted"
                   }`}
                 >
-                  <p className="text-sm">{message.content}</p>
+                  {message.role === "assistant" ? <FormattedResponse content={message.content} /> : <p className="text-sm">{message.content}</p> }
                 </div>
                 {message.role === "user" && (
                   <Avatar>
-                    <AvatarFallback>U</AvatarFallback>
+                    <AvatarFallback><User /></AvatarFallback>
                   </Avatar>
                 )}
               </div>
@@ -107,7 +142,7 @@ export function AiChatComponent() {
             {isLoading && (
               <div className="flex items-start gap-4">
                 <Avatar>
-                  <AvatarFallback>AI</AvatarFallback>
+                  <AvatarFallback><Bot /></AvatarFallback>
                 </Avatar>
                 <div className="bg-muted p-3 rounded-lg flex items-center">
                   <Loader className="h-5 w-5 animate-spin text-muted-foreground" />
@@ -117,11 +152,13 @@ export function AiChatComponent() {
           </div>
         </ScrollArea>
         <div className="border-t p-4 bg-card">
-            <div className="flex gap-2 mb-2 flex-wrap">
-                {messages.length === 0 && suggestedQuestions.map(q => (
-                    <Button key={q} variant="outline" size="sm" onClick={(e) => handleSubmit(e, q)}>{q}</Button>
-                ))}
-            </div>
+            {messages.length === 0 && (
+                <div className="flex gap-2 mb-2 flex-wrap justify-center">
+                    {suggestedQuestions.map(q => (
+                        <Button key={q} variant="outline" size="sm" onClick={(e) => handleSubmit(e, q)}>{q}</Button>
+                    ))}
+                </div>
+            )}
             <form onSubmit={handleSubmit} className="flex items-center gap-2">
             <Input
               type="text"

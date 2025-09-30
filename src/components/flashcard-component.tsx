@@ -30,41 +30,63 @@ export function FlashcardComponent({ flashcards }: FlashcardProps) {
 
   const handleNext = () => {
     setIsFlipped(false);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
+    // Use a short timeout to allow the card to flip back before changing content
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
+    }, 150);
   };
 
   const handlePrev = () => {
     setIsFlipped(false);
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + flashcards.length) % flashcards.length
-    );
+    // Use a short timeout to allow the card to flip back before changing content
+    setTimeout(() => {
+      setCurrentIndex(
+        (prevIndex) => (prevIndex - 1 + flashcards.length) % flashcards.length
+      );
+    }, 150);
   };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.code === 'Space' || e.code === 'Enter') {
+      e.preventDefault();
+      handleFlip();
+    }
+  }
 
   return (
     <div className="w-full max-w-2xl flex flex-col items-center gap-6">
-        <div className="w-full h-80 perspective-1000">
-            <Card
+        <div className="w-full h-80 perspective">
+            <div
                 className={cn(
-                'relative w-full h-full transform-style-preserve-3d transition-transform duration-700 cursor-pointer',
+                'relative w-full h-full transform-style-3d transition-transform duration-700',
                 { 'rotate-y-180': isFlipped }
                 )}
-                onClick={handleFlip}
             >
                 {/* Front of the card */}
-                <div className="absolute w-full h-full backface-hidden flex flex-col justify-center items-center p-6 text-center">
+                <Card
+                    className="absolute w-full h-full backface-hidden flex flex-col justify-center items-center p-6 text-center"
+                    onClick={handleFlip}
+                    onKeyDown={handleKeyDown}
+                    tabIndex={0}
+                >
                     <CardContent className='flex flex-col items-center justify-center'>
                         <Badge variant="secondary" className='absolute top-4 right-4'>{currentCard.domain}</Badge>
                         <p className="text-2xl font-semibold">{currentCard.front}</p>
                     </CardContent>
-                </div>
+                </Card>
                 {/* Back of the card */}
-                <div className="absolute w-full h-full backface-hidden rotate-y-180 flex flex-col justify-center items-center p-6 text-center bg-secondary">
+                <Card 
+                    className="absolute w-full h-full backface-hidden rotate-y-180 flex flex-col justify-center items-center p-6 text-center bg-secondary"
+                    onClick={handleFlip}
+                    onKeyDown={handleKeyDown}
+                    tabIndex={0}
+                >
                     <CardContent className='flex flex-col items-center justify-center'>
-                       <Badge variant="secondary" className='absolute top-4 right-4'>{currentCard.domain}</Badge>
+                       <Badge variant="default" className='absolute top-4 right-4'>{currentCard.domain}</Badge>
                        <p className="text-lg">{currentCard.back}</p>
                     </CardContent>
-                </div>
-            </Card>
+                </Card>
+            </div>
         </div>
 
         <p className="text-muted-foreground">
@@ -72,33 +94,19 @@ export function FlashcardComponent({ flashcards }: FlashcardProps) {
         </p>
 
         <div className="flex items-center justify-center gap-4">
-            <Button variant="outline" size="icon" onClick={handlePrev}>
-            <ArrowLeft className="h-4 w-4" />
+            <Button variant="outline" size="icon" onClick={handlePrev} disabled={flashcards.length <= 1}>
+                <ArrowLeft className="h-4 w-4" />
+                <span className="sr-only">Previous Card</span>
             </Button>
             <Button onClick={handleFlip} className='min-w-[120px]'>
                 <RotateCw className="mr-2 h-4 w-4" />
                 Flip Card
             </Button>
-            <Button variant="outline" size="icon" onClick={handleNext}>
-            <ArrowRight className="h-4 w-4" />
+            <Button variant="outline" size="icon" onClick={handleNext} disabled={flashcards.length <= 1}>
+                <ArrowRight className="h-4 w-4" />
+                <span className="sr-only">Next Card</span>
             </Button>
       </div>
-
-      <style jsx>{`
-        .perspective-1000 {
-          perspective: 1000px;
-        }
-        .transform-style-preserve-3d {
-          transform-style: preserve-3d;
-        }
-        .rotate-y-180 {
-          transform: rotateY(180deg);
-        }
-        .backface-hidden {
-          backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
-        }
-      `}</style>
     </div>
   );
 }
