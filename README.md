@@ -33,11 +33,11 @@ A comprehensive, all-in-one learning platform for ServiceNow CSA & CAD certifica
 *Welcome dashboard with quick stats and navigation*
 
 ### Learning Resources
-![Resources](https://github.com/tanaygt/ServiceNow-CSA-Prep-By-Firbase/blob/main/Screenshot%202025-09-30%20163455.png)
+![Resources](https://github.com/tanaygt/ServiceNow-CSA-Prep-By-Firbase/blob/main/Screenshot%202025-09-30%20163559.png)
 *Organized resource library with direct links*
 
 ### AI Mentor Chat
-![AI Mentor](https://github.com/tanaygt/ServiceNow-CSA-Prep-By-Firbase/blob/main/Screenshot%202025-09-30%20163559.png)
+![AI Mentor](https://github.com/tanaygt/ServiceNow-CSA-Prep-By-Firbase/blob/main/Screenshot%202025-09-30%20171632.png)
 *AI-powered chat assistant for instant help*
 
 ### Interactive Flashcards
