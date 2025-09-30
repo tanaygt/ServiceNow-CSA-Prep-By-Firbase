@@ -13,19 +13,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowUpRight, BookOpen, ClipboardCheck, Zap, MessageSquare, ExternalLink } from "lucide-react"
+import { ArrowUpRight, BookOpen, ClipboardCheck, Zap, MessageSquare, ExternalLink, Linkedin } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { learningResources } from "@/lib/data"
 import { ResourceCard } from "@/components/resource-card"
 
 export default function Dashboard() {
   const user = {
-    name: "Learner",
-    certification: "CSA",
-    progress: 42,
+    name: "Tanay Shrivastava",
+    certification: "CSA Certified Professional",
   }
 
   const quickActions = [
@@ -45,7 +43,7 @@ export default function Dashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold font-headline">Welcome back, {user.name}!</h1>
-          <p className="text-muted-foreground">Here's your progress on the {user.certification} certification path.</p>
+          <p className="text-muted-foreground">{user.certification}</p>
         </div>
         <Link href="/dashboard/learning-resources">
             <Button>
@@ -54,20 +52,25 @@ export default function Dashboard() {
         </Link>
       </div>
       <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Overall Progress
-            </CardTitle>
-            <div className="text-primary h-4 w-4" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{user.progress}%</div>
-            <p className="text-xs text-muted-foreground">
-              +15% from last week
-            </p>
-            <Progress value={user.progress} className="mt-2 h-2" />
-          </CardContent>
+        <Card className="border-l-4 border-blue-500">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">LinkedIn Profile</CardTitle>
+                <Linkedin className="h-4 w-4 text-blue-600" />
+            </CardHeader>
+            <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">Connect for opportunities</p>
+                <a 
+                    href="https://www.linkedin.com/in/tanayshrivastava-cse/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-full"
+                >
+                    <Button variant="outline" size="sm" className="w-full">
+                        View Profile
+                        <ExternalLink className="ml-2 h-4 w-4" />
+                    </Button>
+                </a>
+            </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -115,7 +118,7 @@ export default function Dashboard() {
             <div className="grid gap-2">
               <CardTitle>Top Learning Resources</CardTitle>
               <CardDescription>
-                Direct links to kickstart your {user.certification} exam preparation.
+                Direct links to kickstart your {user.certification} preparation.
               </CardDescription>
             </div>
             <Button asChild size="sm" className="ml-auto gap-1">
