@@ -18,38 +18,22 @@ function AIMessage({ text }: { text: string }) {
     const [isExpanded, setIsExpanded] = useState(false);
     const maxLength = 200;
 
-    if (text.length <= maxLength || isExpanded) {
-        return (
-            <div className="whitespace-pre-wrap">
-                <p>{text}</p>
-                {text.length > maxLength && (
-                    <Button
-                        variant="link"
-                        size="sm"
-                        onClick={() => setIsExpanded(false)}
-                        className="px-0 h-auto text-primary"
-                    >
-                        Read less
-                        <ChevronUp className="ml-1 h-4 w-4" />
-                    </Button>
-                )}
-            </div>
-        );
-    }
+    const displayText = isExpanded ? text : text.substring(0, maxLength);
 
-    const truncatedText = text.substring(0, maxLength) + '...';
     return (
-        <div>
-            <p className="whitespace-pre-wrap">{truncatedText}</p>
-            <Button
-                variant="link"
-                size="sm"
-                onClick={() => setIsExpanded(true)}
-                className="px-0 h-auto text-primary"
-            >
-                Read more
-                <ChevronDown className="ml-1 h-4 w-4" />
-            </Button>
+        <div className="whitespace-pre-wrap">
+            <p>{isExpanded ? text : (text.length > maxLength ? text.substring(0, maxLength) + '...' : text)}</p>
+            {text.length > maxLength && (
+                <Button
+                    variant="link"
+                    size="sm"
+                    onClick={() => setIsExpanded(!isExpanded)}
+                    className="px-0 h-auto text-primary"
+                >
+                    {isExpanded ? 'Read less' : 'Read more'}
+                    {isExpanded ? <ChevronUp className="ml-1 h-4 w-4" /> : <ChevronDown className="ml-1 h-4 w-4" />}
+                </Button>
+            )}
         </div>
     );
 };
@@ -135,7 +119,7 @@ export function AiChatComponent() {
                       : "bg-muted"
                   }`}
                 >
-                  {message.role === "assistant" ? <AIMessage text={message.content} /> : <p>{message.content}</p> }
+                  {message.role === "assistant" ? <AIMessage text={message.content} /> : <p className="whitespace-pre-wrap">{message.content}</p> }
                 </div>
                 {message.role === "user" && (
                   <Avatar>
